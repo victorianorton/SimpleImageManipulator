@@ -1,11 +1,14 @@
-CC=gcc
-CFLAGS=-c
-CFLAGS2=-o
-SOURCES=imageManip.c
+prog: main.o functions.o image.o
+	g++ -o proj3B main.o functions.o image.o
 
-lib:
-	$(CC) $(CFLAGS) $(SOURCES)
-	$(CC) imageManip.o $(CFLAGS2) imageManip
+main3B.o: main.C functions.h image.h
+	g++ -c -I. main.C
+
+functions.o: functions.C functions.h image.h
+	g++ -c -I. functions.C
+
+image.o: image.C image.h
+	g++ -c -I. image.C
 
 clean:
 	rm -rf *o $(SOURCES) 
