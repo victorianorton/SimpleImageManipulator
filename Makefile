@@ -1,11 +1,11 @@
-prog: main.o functions.o image.o
-	g++ -o proj3B main.o functions.o image.o
+prog: main.o filters.o image.o
+	g++ -o imageManip main.o filters.o image.o
 
-main3B.o: main.C functions.h image.h
+main3B.o: main.C filters.h image.h
 	g++ -c -I. main.C
 
-functions.o: functions.C functions.h image.h
-	g++ -c -I. functions.C
+filters.o: filters.C filters.h image.h
+	g++ -c -I. filters.C
 
 image.o: image.C image.h
 	g++ -c -I. image.C
