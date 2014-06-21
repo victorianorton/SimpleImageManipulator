@@ -1,14 +1,12 @@
-prog: main.o filters.o image.o
-	g++ -o imageManipulator main.o filters.o image.o
+SRC=main.C image.C sink.C source.C PNMreader.C PNMwriter.C filters.C
+OBJ=$(SRC:.C=.o)
 
-main.o: main.C filters.h image.h
-	g++ -c -I. main.C
+prog: $(OBJ)
+	g++ $(OBJ) -o imageManipulator
 
-filters.o: filters.C filters.h image.h
-	g++ -c -I. filters.C
-
-image.o: image.C image.h
-	g++ -c -I. image.C
+.C.o: $<
+	g++ -I. -c $<
 
 clean:
-	rm -rf *o $(SOURCES) 
+	rm *.o imageManipulator
+

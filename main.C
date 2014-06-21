@@ -1,18 +1,49 @@
-#include <stdio.h>
+#include "PNMreader.h"
+#include "PNMwriter.h"
 #include "filters.h"
-#include "image.h"
 
 int main(int argc, char *argv[])
 {
-    Image img, img2, img3, img4, img5, img6, img7, img8, img9;
-
-    ReadImage(argv[1], img);
-    HalveInSize(img, img2);
-    LeftRightConcatenate(img2, img2, img3);
-    TopBottomConcatenate(img3, img3, img4);
-    HalveInSize(img4, img5);
-    LeftRightConcatenate(img5, img2, img6);
-    TopBottomConcatenate(img6, img3, img7);
-    Blend(img7, img, 0.8, img8);
-    WriteImage(argv[2], img8);
+    PNMreader reader(argv[1]);
+    PNMwriter writer;
+    Shrinker shrinker1;
+    Shrinker shrinker2;
+    LRConcat lrconcat1;
+    LRConcat lrconcat2;
+    TBConcat tbconcat1;
+    TBConcat tbconcat2;
+    Blender  blender;
+    blender.SetFactor(0.8);
+    
+    shrinker1.SetInput(reader.GetOutput());
+    
+    lrconcat1.SetInput(shrinker1.GetOutput());
+    lrconcat1.SetInput2(shrinker1.GetOutput());
+    
+    tbconcat1.SetInput(lrconcat1.GetOutput());
+    tbconcat1.SetInput2(lrconcat1.GetOutput());
+    
+    shrinker2.SetInput(tbconcat1.GetOutput());
+    
+    lrconcat2.SetInput(shrinker2.GetOutput());
+    lrconcat2.SetInput2(shrinker1.GetOutput());
+    
+    tbconcat2.SetInput(lrconcat2.GetOutput());
+    tbconcat2.SetInput2(lrconcat1.GetOutput());
+    
+    blender.SetInput(tbconcat2.GetOutput());
+    blender.SetInput2(reader.GetOutput());
+    
+    writer.SetInput(blender.GetOutput());
+    
+    reader.Execute();
+    shrinker1.Execute();
+    lrconcat1.Execute();
+    tbconcat1.Execute();
+    shrinker2.Execute();
+    lrconcat2.Execute();
+    tbconcat2.Execute();
+    blender.Execute();
+    
+    writer.Write(argv[2]);
 }

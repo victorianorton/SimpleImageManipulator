@@ -1,10 +1,40 @@
-#include "image.h"
+#include "source.h"
+#include "sink.h"
+#include <stdio.h>
 
-void ReadImage(char *filename, Image &output);
-void WriteImage(char *filename, Image &img);
+#ifndef FILTERS_H
+#define FILTERS_H
 
-void YellowDiagonal(Image &input, Image &output);
-void HalveInSize(Image &input, Image &output); 
-void LeftRightConcatenate(Image &leftInput, Image &rightinput, Image &output);
-void TopBottomConcatenate(Image &topInput, Image &bottomInput, Image &output);
-void Blend(Image &input1, Image &input2, float factor, Image &output);
+class filters: public source, public sink
+{
+
+};
+
+class Shrinker: public filters
+{
+	public:
+	    void Execute();
+};
+
+class LRConcat: public filters
+{
+	public:
+	    void Execute();
+};
+
+class TBConcat: public filters
+{
+	public:
+	    void Execute();
+};
+
+class Blender: public filters
+{
+	protected:
+	    float factor;
+	public:
+	    void SetFactor(float factor);
+	    void Execute();
+};
+
+#endif
