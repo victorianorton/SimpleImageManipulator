@@ -4,7 +4,8 @@ SimpleImageManipulator
 A simple image manipulator program written in C++.  
 
 **To run the program via terminal:**  
-Download and then cd to the directory that it is in  
+Download and then cd to the directory that you put it into  
+'cd' into the folder called src  
 Type 'make'  
 Type './imageManipulator input.pnm output.pnm  
 
