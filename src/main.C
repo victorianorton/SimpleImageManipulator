@@ -1,11 +1,11 @@
-#include "PNMreader.h"
-#include "PNMwriter.h"
+#include "PNMreaderCPP.h"
+#include "PNMwriterCPP.h"
 #include "filters.h"
 
 int main(int argc, char *argv[])
 {
-    PNMreader reader(argv[1]);
-    PNMwriter writer;
+    PNMreaderCPP reader(argv[1]);
+    PNMwriterCPP writer;
     Shrinker shrinker1;
     Shrinker shrinker2;
     LRConcat lrconcat1;
