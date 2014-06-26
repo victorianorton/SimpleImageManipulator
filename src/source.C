@@ -7,7 +7,12 @@ Image * source::GetOutput()
 	return &img;
 }
 
+void source::Update()
+{
+	Execute();
+}
+
 source::source()
 {
-	
+	img.SetSource(this);
 };

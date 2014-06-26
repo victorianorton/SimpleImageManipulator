@@ -21,10 +21,6 @@ void PNMreader::Execute()
     
     fscanf(f, "%s\n%d %d\n%d\n", magicNum, &width, &height, &maxval);
     
-    /*
-    printf("Magic num = %s width = %d, height = %d, maxval = %d\n", magicNum, width, height, maxval);
-    */
-    
     if (strcmp(magicNum, "P6") != 0)
     {
         fprintf(stderr, "Unable to read from filename %s, because it is not a PNM filename of type P6\n", this->filename);

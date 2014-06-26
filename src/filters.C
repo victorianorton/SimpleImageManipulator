@@ -18,17 +18,16 @@ void Shrinker::Execute()
             img.GetBuffer()[3*(i*img.GetWidth()+j)+2] = image1->GetBuffer()[3*(2*i*image1->GetWidth()+2*j)+2];
         }
     }
-
 }
 
 void LRConcat::Execute()
 {
-    int i, j;                                                   // Initialize the i & j  variables 
+    int i, j;                                                        // Initialize the i & j  variables 
     int width, height;
 
     width = image1->GetWidth() + image2->GetWidth();
 
-    if(image1->GetHeight() > image2->GetHeight())               // Find the max height of the two images 
+    if(image1->GetHeight() > image2->GetHeight())                   // Find the max height of the two images 
     {
         height = image1->GetWidth();
     }
@@ -43,8 +42,8 @@ void LRConcat::Execute()
     {
         for(j = 0; j < img.GetWidth(); j++)
         {           
-           if(j < image1->GetWidth())
-           {
+            if(j < image1->GetWidth())
+            {
                 img.GetBuffer()[3*(i*img.GetWidth()+j)+0] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+0];
                 img.GetBuffer()[3*(i*img.GetWidth()+j)+1] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+1];
                 img.GetBuffer()[3*(i*img.GetWidth()+j)+2] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+2];
@@ -67,8 +66,8 @@ void TBConcat::Execute()
 
     height = image1->GetHeight() + image2->GetHeight();
 
-    if(image1->GetWidth() > image2->GetWidth())                 // Find the max width of the two images
-    {   
+    if(image1->GetWidth() > image2->GetWidth())            // Find the max width of the two images
+    {
         width = image1->GetWidth();
     }
     else
@@ -85,18 +84,16 @@ void TBConcat::Execute()
             img.GetBuffer()[3*(i*img.GetWidth()+j)+0] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+0];
             img.GetBuffer()[3*(i*img.GetWidth()+j)+1] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+1];
             img.GetBuffer()[3*(i*img.GetWidth()+j)+2] = image1->GetBuffer()[3*(i*image1->GetWidth()+j)+2];  
-
         }
     }
 
-     for(i = 0; i < image2->GetHeight(); i++)
+    for(i = 0; i < image2->GetHeight(); i++)
     {
         for(j = 0; j < img.GetWidth(); j++)
         {
             img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+0] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+0];
             img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+1] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+1];
             img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+2] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+2];
-
         }
     }
 }
@@ -115,7 +112,7 @@ void Blender::Execute()
 
     memcpy(img.GetBuffer(), image1->GetBuffer(), 3*image1->GetWidth()*image1->GetHeight());         // Copy the image memory and create a new one
 
-    for(i = 0; i < img.GetHeight(); i++)                                                            // For loop to set the pixel color down the diagonal 
+    for(i = 0; i < img.GetHeight(); i++)                                                         // For loop to set the pixel color down the diagonal 
     {
         for(j = 0; j < img.GetWidth(); j++)
         {                  

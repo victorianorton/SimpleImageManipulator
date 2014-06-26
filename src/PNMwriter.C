@@ -14,10 +14,6 @@ void PNMwriter::Write(char *filename)
     
     fprintf(f, "P6\n%d %d\n%d\n", image1->GetWidth(), image1->GetHeight(), 255);
 
-    /*
-    fprintf(stderr, "P6\n%d %d\n%d\n", image1->GetWidth(), image1->GetHeight(), image1->GetMaxval());
-    */
-    
     fwrite(image1->GetBuffer(), sizeof(unsigned char), 3 * image1->GetWidth() * image1->GetHeight(), f);
 
     fclose(f);

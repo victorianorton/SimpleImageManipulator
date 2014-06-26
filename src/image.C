@@ -1,6 +1,8 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "image.h"
+#include "source.h"
 
 Image::Image()
 {
@@ -24,6 +26,16 @@ Image::Image(int w, int h)
     buffer = new unsigned char[3 * width * height];
 }
 
+void Image::SetSource(source *source)
+{
+    src = source;
+}
+
+void Image::Update() const
+{
+    src->Update();
+}
+
 void Image::ResetSize(int w, int h)
 {
     width = w;
@@ -31,17 +43,17 @@ void Image::ResetSize(int w, int h)
     buffer = new unsigned char[3 * width * height];
 }
 
-int Image::GetWidth() 
+int Image::GetWidth()const
 {
     return width;
 }
 
-int Image::GetHeight()
+int Image::GetHeight()const
 {
     return height;
 }
 
-unsigned char * Image::GetBuffer()
- {
+unsigned char * Image::GetBuffer()const
+{
     return buffer;
 }

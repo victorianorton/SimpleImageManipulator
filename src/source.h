@@ -5,12 +5,14 @@
 
 class source
 {
-protected:
+	protected:
 	    Image img;
+	    virtual void Execute() = 0;
 
 	public:
+		virtual void Update();
 	    Image * GetOutput();
-	    virtual void Execute() = 0;
+	    void SetSource();
 	    source();
 };
 

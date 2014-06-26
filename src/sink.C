@@ -1,4 +1,11 @@
 #include "sink.h"
+#include <stdio.h>
+
+sink::sink()
+{
+	image1 = NULL;
+	image2 = NULL;
+};
 
 void sink::SetInput(Image  *image1)
 {
@@ -9,8 +16,3 @@ void sink::SetInput2(Image *image2)
 {
     this->image2 = image2;
 }
-
-sink::sink()
-{
-	
-};

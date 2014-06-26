@@ -1,11 +1,10 @@
-#include "source.h"
-#include "sink.h"
+#include "filter.h"
 #include <stdio.h>
 
 #ifndef FILTERS_H
 #define FILTERS_H
 
-class filters: public source, public sink
+class filters: public filter
 {
 
 };
@@ -32,6 +31,7 @@ class Blender: public filters
 {
 	protected:
 	    float factor;
+	    
 	public:
 	    void SetFactor(float factor);
 	    void Execute();

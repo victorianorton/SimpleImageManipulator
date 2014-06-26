@@ -6,14 +6,13 @@
 class sink
 {
 	protected:
-	    Image * image1;
-	    Image * image2;
+	    const Image *image1;
+	   	const Image *image2;
 	    
 	public:
-	    void SetInput(Image *image1);
-	    void SetInput2(Image *image2);
+	    void SetInput( Image *image1);
+	    void SetInput2( Image *image2);
 	    sink();
-
 };
 
 #endif
