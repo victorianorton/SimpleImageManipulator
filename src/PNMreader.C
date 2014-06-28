@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "logging.h"
 
 PNMreader::PNMreader(char *filename)
 {
@@ -30,4 +31,11 @@ void PNMreader::Execute()
     fread(img.GetBuffer(), sizeof(unsigned char), 3 * img.GetWidth() * img.GetHeight(), f);
         
     fclose(f);
+}
+
+const char * PNMreader::SourceName()
+{
+    const char *msg;
+    msg = "PNMreader";
+    return msg;
 }

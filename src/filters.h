@@ -4,35 +4,39 @@
 #ifndef FILTERS_H
 #define FILTERS_H
 
-class filters: public filter
+class Filters: public Filter
 {
 
 };
 
-class Shrinker: public filters
+class Shrinker: public Filters
 {
 	public:
+		const char * FilterName();
 	    void Execute();
 };
 
-class LRConcat: public filters
+class LRConcat: public Filters
 {
 	public:
+		const char * FilterName();
 	    void Execute();
 };
 
-class TBConcat: public filters
+class TBConcat: public Filters
 {
 	public:
-	    void Execute();
+		const char * FilterName();
+		void Execute();
 };
 
-class Blender: public filters
+class Blender: public Filters
 {
 	protected:
 	    float factor;
 	    
 	public:
+		const char * FilterName();
 	    void SetFactor(float factor);
 	    void Execute();
 };

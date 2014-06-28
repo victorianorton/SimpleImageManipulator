@@ -2,14 +2,15 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-class source;
+class Source;
 
 class Image
 {
     private:
+        //Image & operator=(const Image &) {;};
         int  width, height;                                         /* Initialize width, height, and maxvalue */
         unsigned char *buffer;                                          /* Initialize the 1D array as buffer */
-        source *src;
+        Source *src;
 
     public:
         Image();                                                    //Default constructor
@@ -17,7 +18,7 @@ class Image
         Image(int w, int h);                                         //Parametertized  constructor
 
         void Update() const;
-        void SetSource(source *source);
+        void SetSource(Source *source);
         int GetWidth() const;                                             //Initalize the get and set methods
         int GetHeight() const;
         unsigned char *GetBuffer() const;

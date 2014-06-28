@@ -4,13 +4,14 @@
 #ifndef PNMREADER_H
 #define PNMREADER_H
 
-class PNMreader: public source
+class PNMreader: public Source
 {
 	protected:
 	    char *filename;
 	    
 	public:
 	    virtual void Execute();
+	    const char *SourceName();
 	    PNMreader(char *filename);
 };
 

@@ -4,10 +4,11 @@
 #ifndef PNMWRITER_H
 #define PNMWRITER_H
 
-class PNMwriter: public sink
+class PNMwriter: public Sink
 {
 	public:
 	    void Write(char *filename);
+	    const char * SinkName();
 };
 
 #endif

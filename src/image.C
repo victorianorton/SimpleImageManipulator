@@ -26,7 +26,7 @@ Image::Image(int w, int h)
     buffer = new unsigned char[3 * width * height];
 }
 
-void Image::SetSource(source *source)
+void Image::SetSource(Source *source)
 {
     src = source;
 }
