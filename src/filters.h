@@ -41,4 +41,19 @@ class Blender: public Filters
 	    void Execute();
 };
 
+class Crop : public Filters
+{
+  	private:
+    	int Istart, Istop, Jstart, Jstop;
+
+  	public:
+       	const char * FilterName();
+    	void   Execute();
+    	void SetRegion(int Istart_, int Istop_, int Jstart_, int Jstop_);
+    	Crop()  
+		{ 
+    		Istart = Istop = Jstart = Jstop = -1; 
+		};
+};
+
 #endif

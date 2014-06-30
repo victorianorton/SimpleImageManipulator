@@ -193,3 +193,66 @@ const char * Blender::FilterName()
 {
     return "Blender";
 }
+
+void Crop::Execute()
+{
+    if (Istart < 0 || Istop < 0 || Jstart < 0 || Jstop < 0)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: uninitialized region", FilterName());
+        DataFlowException e(FilterName(), msg);
+        throw e;
+    }
+    if (Istart >= image1->GetWidth() || Istop >= image1->GetWidth())
+    {
+        char msg[1024];
+        sprintf(msg, "%s: region outside image width", FilterName());
+        DataFlowException e(FilterName(), msg);
+        throw e;
+    }
+    if (Jstart >= image1->GetHeight() || Jstop >= image1->GetHeight())
+    {
+        char msg[1024];
+        sprintf(msg, "%s: region outside image height", FilterName());
+        DataFlowException e(FilterName(), msg);
+        throw e;
+    }
+    if (Istop < Istart || Jstop < Jstart)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: invalid region", FilterName());
+        DataFlowException e(FilterName(), msg);
+        throw e;
+    }
+
+    int height = Jstop-Jstart+1;
+    int width  = Istop-Istart+1;
+    int inputWidth = image1->GetWidth();
+    img.ResetSize(width, height);
+    unsigned char *buffer = img.GetBuffer();
+    const unsigned char *buffer1 = image1->GetBuffer();
+    for (int i = Istart ; i <= Istop ; i++)
+    {
+        for (int j = Jstart ; j <= Jstop ; j++)
+        {
+            int idx1 = j*inputWidth+i;
+            int idx  = (j-Jstart)*width+(i-Istart);
+            buffer[3*idx]   = buffer1[3*idx1];
+            buffer[3*idx+1] = buffer1[3*idx1+1];
+            buffer[3*idx+2] = buffer1[3*idx1+2];
+        }
+    }
+}
+
+void Crop::SetRegion(int Istart_, int Istop_, int Jstart_, int Jstop_)
+{
+    Istart = Istart_;
+    Istop  = Istop_;
+    Jstart = Jstart_;
+    Jstop  = Jstop_;
+}
+
+const char *Crop::FilterName() 
+{ 
+    return "Crop"; 
+}

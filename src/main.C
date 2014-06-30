@@ -13,8 +13,10 @@ int main(int argc, char *argv[])
     TBConcat tbconcat1;
     TBConcat tbconcat2;
     Blender  blender;
+    Crop     crop;
 
     blender.SetFactor(0.8);
+    crop.SetRegion(300, 1400, 50, 400);
 
     shrinker1.SetInput(reader.GetOutput());
 
@@ -35,8 +37,11 @@ int main(int argc, char *argv[])
     blender.SetInput(tbconcat2.GetOutput());
     blender.SetInput2(reader.GetOutput());
 
-    writer.SetInput(blender.GetOutput());
- 
-    blender.GetOutput()->Update();
+    crop.SetInput(blender.GetOutput());
+
+    writer.SetInput(crop.GetOutput());
+
+    crop.GetOutput()->Update();
+
     writer.Write(argv[2]);
 }

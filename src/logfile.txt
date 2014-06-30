@@ -1,3 +1,4 @@
+Crop: about to update input1
 Blender: about to update input1
 TBConcat: about to update input1
 LRConcat: about to update input1
@@ -102,3 +103,6 @@ PNMreader: done executing
 Blender: done to update input2
 Blender: about to execute
 Blender: done executing
+Crop: done updating input1
+Crop: about to execute
+Crop: done executing
