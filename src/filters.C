@@ -256,3 +256,37 @@ const char *Crop::FilterName()
 { 
     return "Crop"; 
 }
+
+void Transpose::Execute()
+{
+    int i, j, index, index1;
+
+    if(image1 == NULL)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: no input\n", SinkName());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }
+
+    img.ResetSize(image1->GetHeight(), image1->GetWidth());
+
+    for(i = 0; i < img.GetHeight(); i++) 
+    {
+        for(j = 0; j < img.GetWidth(); j++) 
+        {
+            index = 3*(i*img.GetWidth()+j);
+            index1 = 3*(j*image1->GetWidth()+i);
+
+            img.GetBuffer()[index + 0] = image1->GetBuffer()[index1 + 0];
+            img.GetBuffer()[index + 1] = image1->GetBuffer()[index1 + 1];
+            img.GetBuffer()[index + 2] = image1->GetBuffer()[index1 + 2];
+        }
+    }
+    
+}
+
+const char *Transpose::FilterName()
+{
+    return "Transpose";
+}

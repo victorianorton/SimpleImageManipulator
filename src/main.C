@@ -5,15 +5,16 @@
 int main(int argc, char *argv[])
 {
     PNMreader reader(argv[1]);
-    PNMwriter writer;
-    Shrinker shrinker1;
-    Shrinker shrinker2;
-    LRConcat lrconcat1;
-    LRConcat lrconcat2;
-    TBConcat tbconcat1;
-    TBConcat tbconcat2;
-    Blender  blender;
-    Crop     crop;
+    PNMwriter   writer;
+    Shrinker    shrinker1;
+    Shrinker    shrinker2;
+    LRConcat    lrconcat1;
+    LRConcat    lrconcat2;
+    TBConcat    tbconcat1;
+    TBConcat    tbconcat2;
+    Blender     blender;
+    Crop        crop;
+    Transpose   transpose;
 
     blender.SetFactor(0.8);
     crop.SetRegion(300, 1400, 50, 400);
@@ -39,9 +40,11 @@ int main(int argc, char *argv[])
 
     crop.SetInput(blender.GetOutput());
 
-    writer.SetInput(crop.GetOutput());
+    transpose.SetInput(crop.GetOutput());
 
-    crop.GetOutput()->Update();
+    writer.SetInput(transpose.GetOutput());
+
+    transpose.GetOutput()->Update();
 
     writer.Write(argv[2]);
 }

@@ -56,4 +56,11 @@ class Crop : public Filters
 		};
 };
 
+class Transpose : public Filters
+{
+	public:
+		const char * FilterName();
+		void Execute();
+};
+
 #endif

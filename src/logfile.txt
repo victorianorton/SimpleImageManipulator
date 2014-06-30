@@ -1,3 +1,4 @@
+Transpose: about to update input1
 Crop: about to update input1
 Blender: about to update input1
 TBConcat: about to update input1
@@ -106,3 +107,6 @@ Blender: done executing
 Crop: done updating input1
 Crop: about to execute
 Crop: done executing
+Transpose: done updating input1
+Transpose: about to execute
+Transpose: done executing
