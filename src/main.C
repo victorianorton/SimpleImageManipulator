@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     Blender     blender;
     Crop        crop;
     Transpose   transpose;
+    Invert      invert;
 
     blender.SetFactor(0.8);
     crop.SetRegion(300, 1400, 50, 400);
@@ -38,13 +39,15 @@ int main(int argc, char *argv[])
     blender.SetInput(tbconcat2.GetOutput());
     blender.SetInput2(reader.GetOutput());
 
-    crop.SetInput(blender.GetOutput());
+    //crop.SetInput(blender.GetOutput());
 
-    transpose.SetInput(crop.GetOutput());
+    //transpose.SetInput(crop.GetOutput());
 
-    writer.SetInput(transpose.GetOutput());
+    invert.SetInput(blender.GetOutput());
 
-    transpose.GetOutput()->Update();
+    writer.SetInput(invert.GetOutput());
+
+    invert.GetOutput()->Update();
 
     writer.Write(argv[2]);
 }

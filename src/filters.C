@@ -290,3 +290,34 @@ const char *Transpose::FilterName()
 {
     return "Transpose";
 }
+
+void Invert::Execute()
+{
+    int i, j;
+
+    if(image1 == NULL)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: no input\n", SinkName());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }
+
+    img.ResetSize(image1->GetWidth(), image1->GetHeight());
+    
+    for(i = 0; i < image1->GetWidth(); i++)
+    {
+        for(j = 0; j < image1->GetHeight(); j++)
+        {
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+0] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+0]);
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+1] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+1]);
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+2] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+2]);
+        }
+    }
+}
+
+const char *Invert::FilterName()
+{
+    return "Invert";
+}
+

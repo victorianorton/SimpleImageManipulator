@@ -63,4 +63,11 @@ class Transpose : public Filters
 		void Execute();
 };
 
+class Invert : public Filters
+{
+	public:
+       	const char * FilterName();
+    	void   Execute();
+};
+
 #endif
