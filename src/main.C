@@ -8,14 +8,19 @@ int main(int argc, char *argv[])
     PNMwriter   writer;
     Shrinker    shrinker1;
     Shrinker    shrinker2;
+    Shrinker    shrinker3;
     LRConcat    lrconcat1;
     LRConcat    lrconcat2;
+    LRConcat    lrconcat3;
     TBConcat    tbconcat1;
     TBConcat    tbconcat2;
+    TBConcat    tbconcat3;
     Blender     blender;
     Crop        crop;
     Transpose   transpose;
     Invert      invert;
+
+    Color color(675, 700, 0, 0, 128);
 
     blender.SetFactor(0.8);
     crop.SetRegion(300, 1400, 50, 400);
@@ -24,10 +29,10 @@ int main(int argc, char *argv[])
 
     lrconcat1.SetInput(shrinker1.GetOutput());
     lrconcat1.SetInput2(shrinker1.GetOutput());
-
+   
     tbconcat1.SetInput(lrconcat1.GetOutput());
     tbconcat1.SetInput2(lrconcat1.GetOutput());
-
+    
     shrinker2.SetInput(tbconcat1.GetOutput());
 
     lrconcat2.SetInput(shrinker2.GetOutput());
@@ -39,15 +44,20 @@ int main(int argc, char *argv[])
     blender.SetInput(tbconcat2.GetOutput());
     blender.SetInput2(reader.GetOutput());
 
-    //crop.SetInput(blender.GetOutput());
+    shrinker3.SetInput(blender.GetOutput());
 
-    //transpose.SetInput(crop.GetOutput());
+    lrconcat3.SetInput(color.GetOutput());
+    lrconcat3.SetInput2(shrinker3.GetOutput());
 
-    invert.SetInput(blender.GetOutput());
+    crop.SetInput(lrconcat3.GetOutput());
 
-    writer.SetInput(invert.GetOutput());
+    transpose.SetInput(crop.GetOutput());
+
+    invert.SetInput(lrconcat3.GetOutput());
 
     invert.GetOutput()->Update();
 
+    writer.SetInput(invert.GetOutput());
+    
     writer.Write(argv[2]);
 }

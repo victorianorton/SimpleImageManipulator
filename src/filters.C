@@ -57,9 +57,9 @@ void LRConcat::Execute()
             }           
             else
             {
-                img.GetBuffer()[3*(i*img.GetWidth()+j)+0] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+0];
-                img.GetBuffer()[3*(i*img.GetWidth()+j)+1] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+1];
-                img.GetBuffer()[3*(i*img.GetWidth()+j)+2] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+2];
+                img.GetBuffer()[3*(i*img.GetWidth()+j)+0] = image2->GetBuffer()[3*(i*image2->GetWidth()+j - image1->GetWidth()) + 0];
+                img.GetBuffer()[3*(i*img.GetWidth()+j)+1] = image2->GetBuffer()[3*(i*image2->GetWidth()+j - image1->GetWidth()) + 1];
+                img.GetBuffer()[3*(i*img.GetWidth()+j)+2] = image2->GetBuffer()[3*(i*image2->GetWidth()+j - image1->GetWidth()) + 2];
             }
         }
     }
@@ -126,6 +126,7 @@ void TBConcat::Execute()
         {
             for(j = 0; j < img.GetWidth(); j++)
             {
+                           
                 img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+0] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+0];
                 img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+1] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+1];
                 img.GetBuffer()[3*((i+image1->GetHeight())*img.GetWidth()+j)+2] = image2->GetBuffer()[3*(i*image2->GetWidth()+j)+2];
@@ -321,3 +322,19 @@ const char *Invert::FilterName()
     return "Invert";
 }
 
+void Color::Execute()
+{
+    int i, j;
+
+    img.ResetSize(width, height);
+
+    for(i = 0; i < img.GetWidth(); i++)
+    {
+        for(j = 0; j < img.GetHeight(); j++)
+        {
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+0] = red;
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+1] = green;
+            img.GetBuffer()[3*(j*img.GetWidth()+i)+2] = blue;
+        }
+    }
+}

@@ -70,4 +70,31 @@ class Invert : public Filters
     	void   Execute();
 };
 
+class Color : public Source
+{
+	protected:	
+		int width;
+	    int height;
+	    unsigned char red;
+	    unsigned char green;
+	    unsigned char blue;	
+
+	public:
+       	void   Execute();
+       	
+       	const char * SourceName()
+       	{
+       		return "SourceName";
+       	};
+
+       	Color(int w, int h, unsigned char r, unsigned char g, unsigned char b)
+       	{
+	 		width = w;
+	       	height = h;
+	       	red = r;
+	       	green = g;
+	       	blue = b;
+       	};
+};
+
 #endif
