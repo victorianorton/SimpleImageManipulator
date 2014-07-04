@@ -338,3 +338,27 @@ void Color::Execute()
         }
     }
 }
+
+void CheckSum::OutputCheckSum(const char *file)
+{
+    FILE* checksum = fopen(file, "w");
+
+    int i, j;
+    unsigned char red = 0;
+    unsigned char green = 0;
+    unsigned char blue = 0;
+
+    for(i = 0; i < image1->GetWidth(); i++)
+    {
+        for(j = 0; j < image1->GetHeight(); j++)
+        {
+            red += image1->GetBuffer()[3*(j*image1->GetWidth()+i)+0];
+            green += image1->GetBuffer()[3*(j*image1->GetWidth()+i)+1];
+            blue += image1->GetBuffer()[3*(j*image1->GetWidth()+i)+2];
+        }
+    }
+
+    fprintf(checksum, "CHECKSUM: %d, %d, %d\n", red, green, blue);
+    
+    fclose(checksum);
+}

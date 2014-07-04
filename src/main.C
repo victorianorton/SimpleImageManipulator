@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     Crop        crop;
     Transpose   transpose;
     Invert      invert;
+    CheckSum    checkSum;
 
     Color color(675, 700, 0, 0, 128);
 
@@ -53,11 +54,15 @@ int main(int argc, char *argv[])
 
     transpose.SetInput(crop.GetOutput());
 
-    invert.SetInput(lrconcat3.GetOutput());
+    invert.SetInput(transpose.GetOutput());
 
     invert.GetOutput()->Update();
 
     writer.SetInput(invert.GetOutput());
     
     writer.Write(argv[2]);
+
+    // Since use floating point in blender it does not work well yet for check sum, so check before blender
+    checkSum.SetInput(tbconcat2.GetOutput()); 
+    checkSum.OutputCheckSum("image_checksum");
 }

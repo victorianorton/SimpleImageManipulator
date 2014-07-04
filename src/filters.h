@@ -97,4 +97,15 @@ class Color : public Source
        	};
 };
 
+class CheckSum : public Sink
+{
+	public:
+    	void OutputCheckSum(const char *file);
+
+    	const char * SinkName()
+       	{
+       		return "SinkName";
+       	};
+};
+
 #endif
