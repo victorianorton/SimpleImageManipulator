@@ -11,7 +11,7 @@ Type './imageManipulator input.pnm output.pnm
 
 
 **SimpleImageManipulator has the following filters:**  
-Shrinker -- halves the pixels of the image in size  
+Shrinker -- halves the image in size  
 Left Right Concatenate -- takes two images and connects them left to right  
 Top Bottom Concatenate -- takes two images and connects them top to bottom  
 Blend -- makes the image more transparent, and puts it in front of a background  
