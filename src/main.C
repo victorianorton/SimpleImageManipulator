@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
 
     lrconcat1.SetInput(shrinker1.GetOutput());
     lrconcat1.SetInput2(shrinker1.GetOutput());
-   
+
     tbconcat1.SetInput(lrconcat1.GetOutput());
     tbconcat1.SetInput2(lrconcat1.GetOutput());
-    
+
     shrinker2.SetInput(tbconcat1.GetOutput());
 
     lrconcat2.SetInput(shrinker2.GetOutput());
@@ -44,21 +44,10 @@ int main(int argc, char *argv[])
 
     blender.SetInput(tbconcat2.GetOutput());
     blender.SetInput2(reader.GetOutput());
+    
+    blender.GetOutput()->Update();
 
-    shrinker3.SetInput(blender.GetOutput());
-
-    lrconcat3.SetInput(color.GetOutput());
-    lrconcat3.SetInput2(shrinker3.GetOutput());
-
-    crop.SetInput(lrconcat3.GetOutput());
-
-    transpose.SetInput(crop.GetOutput());
-
-    invert.SetInput(transpose.GetOutput());
-
-    invert.GetOutput()->Update();
-
-    writer.SetInput(invert.GetOutput());
+    writer.SetInput(blender.GetOutput());
     
     writer.Write(argv[2]);
 

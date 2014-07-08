@@ -46,14 +46,7 @@ void LRConcat::Execute()
         DataFlowException e(SinkName(), msg);
         throw e;
     }
-    
-    if(image1->GetWidth() != image2->GetWidth())
-    {
-        char msg[1024];
-        sprintf(msg, "%s: widths must match: %d, %d\n", SinkName(), image1->GetWidth(), image2->GetWidth());
-        DataFlowException e(SinkName(), msg);
-        throw e;
-    }        
+  
 
     width = image1->GetWidth() + image2->GetWidth();
 
@@ -106,6 +99,7 @@ void TBConcat::Execute()
         DataFlowException e(SinkName(), msg);
         throw e;
     }
+
     if(image2 == NULL)
     {
         char msg[1024];
@@ -181,6 +175,7 @@ void Blender::Execute()
         DataFlowException e(SinkName(), msg);
         throw e;
     }
+
     if(image2 == NULL)
     {
         char msg[1024];
@@ -253,9 +248,12 @@ void Crop::Execute()
     int height = Jstop-Jstart+1;
     int width  = Istop-Istart+1;
     int inputWidth = image1->GetWidth();
+
     img.ResetSize(width, height);
+
     unsigned char *buffer = img.GetBuffer();
     const unsigned char *buffer1 = image1->GetBuffer();
+
     for (int i = Istart ; i <= Istop ; i++)
     {
         for (int j = Jstart ; j <= Jstop ; j++)
@@ -318,7 +316,7 @@ const char *Transpose::FilterName()
 
 void Invert::Execute()
 {
-    int i, j;
+    int i, j, index, index1;
 
     if(image1 == NULL)
     {
@@ -334,9 +332,12 @@ void Invert::Execute()
     {
         for(j = 0; j < image1->GetHeight(); j++)
         {
-            img.GetBuffer()[3*(j*img.GetWidth()+i)+0] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+0]);
-            img.GetBuffer()[3*(j*img.GetWidth()+i)+1] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+1]);
-            img.GetBuffer()[3*(j*img.GetWidth()+i)+2] = 255-(image1->GetBuffer()[3*(j*image1->GetWidth()+i)+2]);
+            index = 3*(i*img.GetWidth()+j);
+            index1 = 3*(j*image1->GetWidth()+i);
+
+            img.GetBuffer()[index + 0] = image1->GetBuffer()[index1 + 0];
+            img.GetBuffer()[index + 1] = image1->GetBuffer()[index1 + 1];
+            img.GetBuffer()[index + 2] = image1->GetBuffer()[index1 + 2];
         }
     }
 }
