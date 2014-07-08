@@ -31,6 +31,30 @@ void LRConcat::Execute()
     int i, j;                                                        // Initialize the i & j  variables 
     int width, height;
 
+    if(image1 == NULL)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: no input\n", SinkName());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }
+
+    if(image2 == NULL)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: no input\n", SinkName());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }
+    
+    if(image1->GetWidth() != image2->GetWidth())
+    {
+        char msg[1024];
+        sprintf(msg, "%s: widths must match: %d, %d\n", SinkName(), image1->GetWidth(), image2->GetWidth());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }        
+
     width = image1->GetWidth() + image2->GetWidth();
 
     if(image1->GetHeight() > image2->GetHeight())                   // Find the max height of the two images 
