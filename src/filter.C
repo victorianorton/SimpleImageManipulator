@@ -1,8 +1,20 @@
 #include "filter.h"
 #include "logging.h"
 
+int sumException;
+
 void Filter::Update()
 {	
+	sumException++;
+
+	if(sumException > 1000)
+	{
+		char msg[1024];
+		sprintf(msg, "%s: greater than 1000\n", SinkName());
+		DataFlowException e(SinkName(), msg);
+		throw e;
+	}
+	
 	if(image1 != NULL)
 	{
 		char msg[128];
