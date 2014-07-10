@@ -46,7 +46,14 @@ void LRConcat::Execute()
         DataFlowException e(SinkName(), msg);
         throw e;
     }
-  
+    
+    if(image1->GetWidth() != image2->GetWidth())
+    {
+        char msg[1024];
+        sprintf(msg, "%s: widths must match: %d, %d\n", SinkName(), image1->GetWidth(), image2->GetWidth());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }        
 
     width = image1->GetWidth() + image2->GetWidth();
 
@@ -366,6 +373,14 @@ void Color::Execute()
 
 void CheckSum::OutputCheckSum(const char *file)
 {
+	if(image1 == NULL)
+    {
+        char msg[1024];
+        sprintf(msg, "%s: no input\n", SinkName());
+        DataFlowException e(SinkName(), msg);
+        throw e;
+    }
+
     FILE* checksum = fopen(file, "w");
 
     int i, j;

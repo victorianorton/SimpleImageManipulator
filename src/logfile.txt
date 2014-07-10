@@ -1,14 +1,3 @@
-Invert: about to update input1
-Transpose: about to update input1
-Crop: about to update input1
-LRConcat: about to update input1
-SourceName: about executing
-SourceName: done executing
-LRConcat: done updating input1
-LRConcat: about to execute
-LRConcat: done executing
-LRConcat: about to update input2
-Shrinker: about to update input1
 Blender: about to update input1
 TBConcat: about to update input1
 LRConcat: about to update input1
@@ -113,18 +102,3 @@ PNMreader: done executing
 Blender: done to update input2
 Blender: about to execute
 Blender: done executing
-Shrinker: done updating input1
-Shrinker: about to execute
-Shrinker: done executing
-LRConcat: done to update input2
-LRConcat: about to execute
-LRConcat: done executing
-Crop: done updating input1
-Crop: about to execute
-Crop: done executing
-Transpose: done updating input1
-Transpose: about to execute
-Transpose: done executing
-Invert: done updating input1
-Invert: about to execute
-Invert: done executing
