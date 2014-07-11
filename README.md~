@@ -2,13 +2,13 @@ SimpleImageManipulator
 ======================
 
 A simple image manipulator program written in C++.  
-Features data flow execution, with logger and exception handling.  
 
 **To run the program via terminal:**  
 Download and then cd to the directory that you put it into  
 'cd' into the folder called src  
 Type 'make'  
 Type './imageManipulator input.pnm output.pnm  
+
 
 **SimpleImageManipulator has the following filters:**  
 Shrinker -- halves the pixels of the image in size  
